@@ -2,6 +2,7 @@ import { globSync } from 'glob';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'rollup';
+import { nodeExternals } from 'rollup-plugin-node-externals';
 import tscAlias from 'rollup-plugin-tsc-alias';
 import typescript from 'rollup-plugin-typescript2';
 
@@ -41,8 +42,13 @@ export default defineConfig({
         exclude: ignore,
       },
     }),
+
+    nodeExternals({
+      optDeps: false,
+      builtinsPrefix: 'strip',
+    }),
   ],
-  external: ['glob'],
+  external: ['glob', ''],
   output: [
     {
       format: 'cjs',
