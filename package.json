@@ -1,7 +1,7 @@
 {
   "name": "@bemedev/vitest-exclude",
   "version": "0.0.1",
-  "description": "Exclude files of coverage, more dev-friendly",
+  "description": "Exclude files for test and coverage, more dev-friendly",
   "author": {
     "email": "bri_lvi@icloud.com",
     "name": "chlbri",
