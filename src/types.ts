@@ -1,14 +1,14 @@
-import type { UserConfig } from 'vitest/config';
+import type { ViteUserConfig } from 'vitest/config';
 
 export type Define<T> = Exclude<T, undefined>;
 
 export type Plugin = Exclude<
-  Define<UserConfig['plugins']>[number],
+  Define<ViteUserConfig['plugins']>[number],
   Promise<any> | null | undefined | false | Array<any>
 >;
 
 export type Args = [
-  pattern: string | string[],
+  { patternTest: string | string[]; patternCov: string | string[] },
   {
     ignoreTestFiles?: string[];
     ignoreCoverageFiles?: string[];

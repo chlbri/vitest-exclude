@@ -1,6 +1,10 @@
 import { name } from './constants';
 import type { Args, Plugin, WithPattern } from './types';
-import { buildInclude, defaultPattern, testPattern } from './vitest.utils';
+import {
+  buildInclude,
+  defaultCovPattern,
+  testPattern,
+} from './vitest.utils';
 
 /**
  * Plugin to add files with glob patterns to vitest
@@ -14,8 +18,9 @@ import { buildInclude, defaultPattern, testPattern } from './vitest.utils';
  * The default search patter is './src/**\/\*.ts'
  */
 export function exclude(args: Args[1] = {}) {
-  const _default = defaultPattern();
-  return exclude.withPattern(_default, args);
+  const patternCov = defaultCovPattern();
+  const patternTest = testPattern();
+  return exclude.withPattern({ patternCov, patternTest }, args);
 }
 
 /**
@@ -26,7 +31,7 @@ export function exclude(args: Args[1] = {}) {
  * @returns a vitest config
  */
 exclude.withPattern = ((
-  pattern,
+  { patternTest, patternCov },
   { ignoreCoverageFiles, ignoreTestFiles },
 ): Plugin => {
   return {
@@ -36,11 +41,11 @@ exclude.withPattern = ((
       const testConfig = options?.test;
       const coverage = options?.test?.coverage;
 
-      const includeCov = await buildInclude(pattern, ignoreCoverageFiles);
-      const includeTest = await buildInclude(
-        testPattern(),
-        ignoreTestFiles,
+      const includeCov = await buildInclude(
+        patternCov,
+        ignoreCoverageFiles,
       );
+      const includeTest = await buildInclude(patternTest, ignoreTestFiles);
 
       return {
         ...options,

@@ -6,9 +6,10 @@ export const hasSrc = () => {
   return existsSync(join(process.cwd(), 'src'));
 };
 
-export const defaultPattern = () => {
+export const defaultCovPattern = () => {
   const _src = hasSrc();
-  return `${_src ? 'src/' : ''}**/*.ts`;
+  /* v8 ignore next */
+  return `${_src ? 'src/' : ''}**/*.t{s,sx}`;
 };
 
 export const buildInclude = (
@@ -25,5 +26,6 @@ export const buildInclude = (
 
 export const testPattern = () => {
   const _src = hasSrc();
-  return `${_src ? 'src/' : ''}**/*.{test,spec}.{ts,js}`;
+  /* v8 ignore next */
+  return `${_src ? 'src/' : ''}**/*.{test,spec}.{ts,js,tsx,jsx}`;
 };

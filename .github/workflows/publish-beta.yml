@@ -2,8 +2,7 @@ name: Publish
 on:
   push:
     branches:
-      - master
-      - main
+      - beta
 
 jobs:
   publish:
@@ -12,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.6
 
       - name: Setup node for publication
         uses: actions/setup-node@v4
@@ -23,7 +22,7 @@ jobs:
           scope: '@bemedev'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         id: pnpm-install
         with:
           version: 9
@@ -43,6 +42,7 @@ jobs:
             hashFiles('**/pnpm-lock.yaml')}}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
@@ -55,7 +55,8 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
-          strategy: upgrade
+          strategy: all
+          tag: beta
 
       - name: Check - updated
         if: ${{ steps.publish.outputs.type }}
