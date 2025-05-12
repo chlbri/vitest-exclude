@@ -1,10 +1,9 @@
-name: Publish
-on:
-  push:
+name: PNPM-CACHE
+on: workflow_call
 
 jobs:
-  publish:
-    name: Publish
+  cache:
+    name: PNPM_CACHE
     runs-on: ubuntu-latest
 
     steps:
