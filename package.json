@@ -1,6 +1,6 @@
 {
   "name": "@bemedev/vitest-exclude",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Exclude files for test and coverage, more dev-friendly",
   "author": {
     "email": "bri_lvi@icloud.com",
@@ -91,6 +91,7 @@
     "onchange": "^7.1.0",
     "prettier": "^3.5.3",
     "pretty-quick": "^4.1.1",
+    "rimraf": "^6.0.1",
     "rollup": "^4.40.2",
     "rollup-plugin-node-externals": "^8.0.0",
     "rollup-plugin-tsc-alias": "^1.1.4",

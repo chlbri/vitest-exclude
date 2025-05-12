@@ -12,16 +12,17 @@ export const defaultCovPattern = () => {
   return `${_src ? 'src/' : ''}**/*.t{s,sx}`;
 };
 
-export const buildInclude = (
+const mapper = (str: string) => str.replace(/\\/g, '/');
+export const buildInclude = async (
   pattern: string | string[],
   ignore?: string[],
 ) => {
-  const include = glob(pattern, {
+  const include = await glob(pattern, {
     ignore,
     cwd: process.cwd(),
   });
 
-  return include;
+  return include.map(mapper);
 };
 
 export const testPattern = () => {
