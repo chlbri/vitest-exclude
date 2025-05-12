@@ -3,6 +3,8 @@ import { describe } from 'vitest';
 import { name } from './constants';
 import { exclude } from './vitest';
 
+type Fn = (...args: any) => any;
+
 describe('vitest - exclude', () => {
   const environment = 'node';
   const enabled = true;
@@ -10,7 +12,7 @@ describe('vitest - exclude', () => {
 
   const fn = async (...args: Parameters<typeof exclude>) => {
     const { name, enforce, config: c } = exclude(...args);
-    const fn = c as Function;
+    const fn = c as Fn;
     const config = await fn({
       test: { environment, coverage: { enabled } },
     });
